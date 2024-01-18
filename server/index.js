@@ -13,7 +13,11 @@ app.use(express.urlencoded({extended: false})); //this is common practice for ur
 const PORT = process.env.PORT || 8080; //make sure that you have a .env file
 
 //routes:
-
+app.post('/addUser', async (req, res) => {
+    const {user} = req.body;
+    const newUser = await User.create(user);
+    res.send(newUser);
+});
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING) //make sure that you have a .env file
 .then(() => {
