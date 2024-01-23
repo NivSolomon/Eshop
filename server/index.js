@@ -9,10 +9,11 @@ import userRouter from "./routes/userRouter.js";
 
 const app = express();
 dotenv.config();
+
 app.use(cors()); // does nothing at the moment
 app.use(express.json()); // parses JSONs
 app.use(express.urlencoded({extended: false})); //this is common practice for urlencoded
-// these three lines are boilerplate
+
 const PORT = process.env.PORT || 8080; //make sure that you have a .env file
 
 //routes:
