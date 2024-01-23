@@ -1,23 +1,30 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import axios from "axios";
 import { Button, Container, Form, Link } from "../import.js"
 import Title from "../Components/Shared/Title";
+import {toast} from 'react-toastify';
+import { getError } from "../utils.js";
+import { useNavigate } from "react-router-dom";
+import { Store } from "../store.jsx";
+import  {USER_SIGNIN}  from "../actions.jsx";
 
 function SignIn() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const {dispatch: ctxDispatch} = useContext(Store);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-        const { data } = await axios.post('/api/v1/users/signin', {
-            email,
-            password
-        }) 
-        console.log(data);
+        const { data } = await axios.post('/api/v1/users/signin', {email: email, password: password});
+        ctxDispatch({type:USER_SIGNIN, payload:data});
+        localStorage.setItem('userInfo', JSON.stringify(data));
+        navigate('/');
+        toast.success(`Welcome ${data.name}!`);
     } catch (error) {
-        console.log(error.response.data.message);
+        toast.error(getError(error));
     }
   }
 
@@ -51,4 +58,4 @@ function SignIn() {
   )
 }
 
-export default SignIn
+export default SignIn;
