@@ -1,5 +1,6 @@
 import NavBar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
+import Badge from 'react-bootstrap/Badge';
 import {LinkContainer} from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import SearchBox from './SearchBox';
@@ -10,14 +11,17 @@ import { USER_SIGNOUT } from '../../actions';
 
 const Header = () => {
 
-    const {state} = useContext(Store);
-    const {userInfo} = state;
-    const {dispatch: ctxDispatch} = useContext(Store);
+    const {state, dispatch: ctxDispatch} = useContext(Store);
+    const {userInfo, cart: {cartItems}} = state;
 
 
     const signOutHandler = () => {
-        localStorage.removeItem('userInfo', userInfo)
         ctxDispatch({type:USER_SIGNOUT});
+        localStorage.removeItem('userInfo', userInfo)
+        localStorage.removeItem('cartItems', userInfo)
+        localStorage.removeItem('shippingAddress', userInfo)
+        localStorage.removeItem('paymentMethod', userInfo)
+
     }
 
   return (
@@ -33,12 +37,17 @@ const Header = () => {
                 <nav className='d-flex align-items-center justify-content-end me-2 ms-4'>
                     <Link to="/cart" className='nav-link'>
                         <i className='fa fa-shopping-cart text-white'></i>
+                        {cartItems.length > 0 && (
+                            <Badge pill bg="danger">
+                                {cartItems.reduce((a,c) => a + c.quantity, 0)}
+                            </Badge>
+                        )}
                     </Link>
                 </nav>
                 {userInfo? (
                     <NavDropdown className='text-white' title={userInfo.name}>
                         <NavDropdown.Divider/>
-                        <Link  onClick={(e)=> signOutHandler()} className='dropdown item'>Sign out</Link>
+                        <Link to="#signo" onClick={(e)=> signOutHandler()} className='dropdown item'>Sign out</Link>
                     </NavDropdown>
                 ):<Link to="/signin" className='text-white nav-link'>
                 Sign-in
