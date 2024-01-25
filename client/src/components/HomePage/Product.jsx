@@ -5,16 +5,13 @@ import { Link } from 'react-router-dom';
 import Rating from '../Shared/Rating';
 import { useContext } from 'react';
 import { Store } from '../../store';
+import { addToCartHandler } from '../../utils';
 
 const Product = ({product}) => {
 
   const {state, dispatch: ctxDispatch} = useContext(Store);
   const {cartItems} = state.cart;
-
-  const addToCartHandler= () => {
-
-  }
-
+  
   return (
     <Card className='product-card mb-4'>
         <Link to={`/product/${product.token}`}>
