@@ -1,10 +1,10 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios";
 import { Button, Container, Form, Link } from "../import.js"
 import Title from "../Components/Shared/Title";
 import {toast} from 'react-toastify';
 import { getError } from "../utils.js";
-import { useNavigate } from "react-router-dom";
+import { redirect, useLocation, useNavigate } from "react-router-dom";
 import { Store } from "../store.jsx";
 import  {USER_SIGNIN}  from "../actions.jsx";
 
@@ -13,7 +13,17 @@ function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const {dispatch: ctxDispatch} = useContext(Store);
+  const {state, dispatch: ctxDispatch} = useContext(Store);
+  const {userInfo} = state;
+  const {search} = useLocation();
+  const redirectUrl = new URLSearchParams(search);
+  const  redirectValue = redirectUrl.get("redirect") 
+  const redirect = redirectValue? redirectValue: "/";
+  useEffect(() => {
+    if(userInfo)
+    navigate(redirect)
+  },[navigate, redirect, userInfo]);
+
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -21,7 +31,8 @@ function SignIn() {
         const { data } = await axios.post('/api/v1/users/signin', {email: email, password: password});
         ctxDispatch({type:USER_SIGNIN, payload:data});
         localStorage.setItem('userInfo', JSON.stringify(data));
-        navigate('/');
+        navigate(redirect);
+        navigate(redirect);
         toast.success(`Welcome ${data.name}!`);
     } catch (error) {
         toast.error(getError(error));
@@ -46,11 +57,11 @@ function SignIn() {
           </div>
           <div className="mb-3">
             New customer ? {" "}
-            <Link to="/signup">Create your account</Link>
+            <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
           </div>
           <div className="mb-3">
             Forgot your password ? {" "}
-            <Link to="/reset">Reset your password</Link>
+            <Link to="/forgot-password">Click here</Link>
           </div>
         </Form>
     </Container>

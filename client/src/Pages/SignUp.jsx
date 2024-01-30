@@ -1,6 +1,6 @@
-import { useContext, useRef } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { Button, Container, Form} from '../import.js';
+import { useContext, useEffect, useRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Button, Container, Form, Link} from '../import.js';
 import Title from '../Components/Shared/Title';
 import { Store } from '../store.jsx';
 import { USER_SIGNIN } from '../actions.jsx';
@@ -19,8 +19,17 @@ const SignUp = () => {
     const passwordRef = useRef("");
     const confirmPasswordRef = useRef("");
 
-    const {dispatch: ctxDispatch} = useContext(Store);
-
+    const {state, dispatch: ctxDispatch} = useContext(Store);
+    const {userInfo} = state;
+    const {search} = useLocation();
+    const redirectUrl = new URLSearchParams(search);
+    const  redirectValue = redirectUrl.get("redirect") 
+    const redirect = redirectValue? redirectValue: "/";
+    useEffect(() => {
+        if(userInfo)
+        navigate(redirect)
+      },[navigate, redirect, userInfo]);
+    
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -39,7 +48,7 @@ const SignUp = () => {
       }
 
   return (
-    <Container>
+    <Container className='small-container'>
         <Title title="SignUp Page"/>
         <h1 className='my-3'>Sign Up</h1>
         <Form onSubmit={submitHandler}>
@@ -61,6 +70,9 @@ const SignUp = () => {
             </Form.Group>
             <div className="mb-3">
             <Button type="submit" className="mb-3">Sign Up</Button>
+          </div>
+          <div className='mb-3'>
+            Already have an account? <Link to={`/signin?redirect=${redirect}`}>Sign in</Link>
           </div>
         </Form>
     </Container>

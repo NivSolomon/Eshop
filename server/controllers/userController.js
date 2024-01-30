@@ -32,10 +32,30 @@ export const signIn = async (req, res) =>{
                 _id: user._id,
                 name: user.name,
                 email: user.email,
-                tokem: generateToken(user),
+                token: generateToken(user),
             });
             return;
         }
     }
     res.status(401).send({message: "Invalid Password/User"});
 }
+
+export const getUserById = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const user = await User.findById(id);
+  
+      if (user) {
+        res.send({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+        });
+      } else {
+        res.status(404).send({ message: "User not found" });
+      }
+    } catch (error) {
+      res.status(500).send({ message: "Internal Server Error" });
+    }
+  };

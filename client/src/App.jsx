@@ -10,6 +10,10 @@ import {ToastContainer} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import SignUp from './Pages/SignUp.jsx'
 import Description from './Pages/Description.jsx'
+import ForgotPasswordPage from './Pages/ForgotPasswordPage.jsx'
+import ResetPasswordPage from './Pages/ResetPasswordPage.jsx'
+import CartPage from './Pages/CartPage.jsx'
+import ShippingPage from './Pages/ShippingPage.jsx'
 
 
 function App() {
@@ -26,6 +30,10 @@ function App() {
               <Route path = "/" element = {<HomePage/>}></Route>
               <Route path = "/signin" element = {<SignIn/>}></Route>
               <Route path = "/signup" element = {<SignUp/>}></Route>
+              <Route path = "/cart" element = {<CartPage/>}></Route>
+              <Route path = "/shipping" element = {<ShippingPage/>}></Route>
+              <Route path = "/forgot-password" element = {<ForgotPasswordPage/>}></Route>
+              <Route path = "/password-reset/:id/:token" element = {<ResetPasswordPage/>}></Route>
               <Route path = "/product/:token" element = {<Description/>}></Route>
             </Routes>
           </Container>
