@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Button, Container, Form } from '../import'
 import Title from '../Components/Shared/Title'
 import  axios  from 'axios';
@@ -24,7 +24,7 @@ const ForgotPasswordPage = () => {
   return (
     <Container className='small-container'>
         <Title>Forgot Password Page</Title>
-        <h1>Did you forget your password??</h1>
+        <h1>Did you forget your password?</h1>
         <h5>Don't worry! we will sent you an email to reset the password.</h5>
         <Form onSubmit={submitHandler}>
            <Form.Group className="mb-3">

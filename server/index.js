@@ -7,6 +7,7 @@ import seedRouter from "./routes/seedRouter.js";
 import productRouter from "./routes/productRouter.js";
 import userRouter from "./routes/userRouter.js";
 import passwordResetRouter from "./routes/passwordResetRouter.js";
+import orderRouter from "./routes/orderRouter.js";
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.use('/api/v1/seed', seedRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/password-reset', passwordResetRouter);
+app.use('/api/v1/orders', orderRouter);
 
 app.use((err, req, res, next) => {
     res.status(500).send({message: err.message});

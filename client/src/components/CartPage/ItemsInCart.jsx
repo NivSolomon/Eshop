@@ -19,7 +19,7 @@ import MessageBox from "../Shared/MessageBox";
                       alt={item.title}
                       className="img-fluid rounded img-thumbnail"
                     />
-                    <Link to={`/products/${item.token}`}>{item.title}</Link>
+                    <Link to={`/product/${item.token}`}>{item.title}</Link>
                   </Col>
                   <Col md={2}>
                     <Button
@@ -40,7 +40,7 @@ import MessageBox from "../Shared/MessageBox";
                     </Button>
                   </Col>
                   <Col md={1}>${item.price}</Col>
-                  <Col md={1}><Button variant="light" onClick={()=> removeCartHandler(item)}><i className="fas fa-trash"></i></Button></Col>
+                  <Col md={1}><Button variant="light" disabled={item.quantity === item.countInStock} onClick={()=> removeCartHandler(item)}><i className="fas fa-trash"></i></Button></Col>
                 </Row>
               </ListGroup.Item>
             ))}

@@ -14,6 +14,8 @@ import ForgotPasswordPage from './Pages/ForgotPasswordPage.jsx'
 import ResetPasswordPage from './Pages/ResetPasswordPage.jsx'
 import CartPage from './Pages/CartPage.jsx'
 import ShippingPage from './Pages/ShippingPage.jsx'
+import SubmitOrderPage from './Pages/SubmitOrderPage.jsx'
+import PaymentPage from './Pages/PaymentPage.jsx'
 
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
               <Route path = "/signup" element = {<SignUp/>}></Route>
               <Route path = "/cart" element = {<CartPage/>}></Route>
               <Route path = "/shipping" element = {<ShippingPage/>}></Route>
+              <Route path = "/payment" element = {<PaymentPage/>}></Route>
+              <Route path = "/placeorder" element = {<SubmitOrderPage/>}></Route>
               <Route path = "/forgot-password" element = {<ForgotPasswordPage/>}></Route>
               <Route path = "/password-reset/:id/:token" element = {<ResetPasswordPage/>}></Route>
               <Route path = "/product/:token" element = {<Description/>}></Route>
