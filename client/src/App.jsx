@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 //import Title from './Components/Shared/Title.jsx'
 import Container from 'react-bootstrap/Container'
 import {HomePage} from './Pages/HomePage.jsx'
-import Footer from './Components/Shared/Footer'
+import Footer from './Components/Shared/Footer.jsx'
 import Header from './Components/Shared/Header.jsx'
 import SignIn from './Pages/SignIn.jsx'
 import {ToastContainer} from 'react-toastify';
