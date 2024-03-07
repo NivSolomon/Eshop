@@ -18,14 +18,41 @@ import SubmitOrderPage from './Pages/SubmitOrderPage.jsx'
 import PaymentPage from './Pages/PaymentPage.jsx'
 import OrderConfirmationPage from './Pages/OrderConfirmationPage.jsx'
 import SearchPage from './Pages/SearchPage.jsx'
-
+import { DragDropContext } from 'react-beautiful-dnd';
+import { useContext } from 'react'
+import { Store } from './store.jsx'
+import { addToCartHandler } from './utils.js'
+import axios from 'axios'
 
 function App() {
   
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart } = state;
+
+  const handleDragEnd = async (result) => {
+    const { destination, source, draggableId } = result;
+  
+    // If there is no destination or if the destination is the same as the source, do nothing
+    if (!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) {
+      return;
+    }
+    if(destination.droppableId === 'cart-icon'){
+      try {
+          const {data} = await axios.get(`/api/v1/products/token/${draggableId}`);
+          const draggedProduct = data;
+          addToCartHandler(draggedProduct, cart.cartItems, ctxDispatch);
+          console.log(draggedProduct);
+       } catch (error) {
+        // Handle errors if any
+         console.error('Error fetching dragged product:', error);
+       }
+    }
+  };
 
   return (
     <BrowserRouter>
-      <div className='d-flex flex-column side-allPage min-width'>
+     <DragDropContext onDragEnd={handleDragEnd}>
+       <div className='d-flex flex-column side-allPage min-width'>
         <ToastContainer position='bottom-center' limit={1}/>
         <Header/>
         <main>
@@ -48,6 +75,7 @@ function App() {
         </main>
         <Footer/>
       </div>
+     </DragDropContext>
     </BrowserRouter>
   
   )

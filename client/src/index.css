@@ -136,3 +136,9 @@ body {
     background-color: #f0c040 !important;
     color: #000000 !important;
   }
+
+  .header {
+    width: 100%;
+    height: 9vh;
+  }
+

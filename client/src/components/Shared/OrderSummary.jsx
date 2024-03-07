@@ -3,6 +3,10 @@ import MessageBox from "./MessageBox"
 
 const OrderSummary = ({cart, status, isDelivered}) => {
 
+    if(cart.cartItems === undefined){
+        cart.cartItems = cart.orderItems
+    }
+
     return (
         <>
             <Card className="mb-3">
@@ -57,7 +61,7 @@ const OrderSummary = ({cart, status, isDelivered}) => {
                 </Card.Header>
                 <Card.Body>
                     <ListGroup>
-                        {cart.cartItems.map((item) => (
+                        {cart.cartItems?.map((item) => (
                             <ListGroup.Item key={item._id}>
                                 <Row>
                                     <Col md={3}>
@@ -68,7 +72,7 @@ const OrderSummary = ({cart, status, isDelivered}) => {
                                         />
                                     </Col>
                                     <Col md={5}>
-                                        <Link to={`/products/${item.token}`}>{item.title}</Link>
+                                        <Link to={`/product/${item.token}`}>{item.title}</Link>
                                     </Col>
                                     <Col md={2}><strong>Quantity: </strong><span>{item.quantity}</span></Col>
                                     <Col md={2}>${item.price}</Col>
@@ -83,5 +87,5 @@ const OrderSummary = ({cart, status, isDelivered}) => {
     )
 }
 
-OrderSummary.propTypes = {cart: PropTypes.object, status: PropTypes.string}
+OrderSummary.propTypes = {cart: PropTypes.object, status: PropTypes.string, isDelivered: PropTypes.bool}
 export default OrderSummary

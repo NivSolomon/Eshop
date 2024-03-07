@@ -16,7 +16,6 @@ const PaymentPage = () => {
         e.preventDefault();
         ctxDispatch({ type: SAVE_PAYMENT_METHOD, payload: paymentMethodName });
         localStorage.setItem('paymentMethod', paymentMethodName);
-        console.log(state);
         navigate('/placeorder');
     }
 
