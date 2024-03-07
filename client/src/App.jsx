@@ -2,25 +2,25 @@ import './App.css'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 //import Title from './Components/Shared/Title.jsx'
 import Container from 'react-bootstrap/Container'
-import {HomePage} from './Pages/HomePage.jsx'
-// import Footer from './Components/Shared/Footer.jsx'
-import Header from './Components/Shared/Header.jsx'
-import SignIn from './Pages/SignIn.jsx'
+import {HomePage} from './Pages/HomePage'
+import Footer from './Components/Shared/Footer'
+import Header from './Components/Shared/Header'
+import SignIn from './Pages/SignIn'
 import {ToastContainer} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import SignUp from './Pages/SignUp.jsx'
-import Description from './Pages/Description.jsx'
-import ForgotPasswordPage from './Pages/ForgotPasswordPage.jsx'
-import ResetPasswordPage from './Pages/ResetPasswordPage.jsx'
-import CartPage from './Pages/CartPage.jsx'
-import ShippingPage from './Pages/ShippingPage.jsx'
-import SubmitOrderPage from './Pages/SubmitOrderPage.jsx'
-import PaymentPage from './Pages/PaymentPage.jsx'
-import OrderConfirmationPage from './Pages/OrderConfirmationPage.jsx'
-import SearchPage from './Pages/SearchPage.jsx'
+import SignUp from './Pages/SignUp'
+import Description from './Pages/Description'
+import ForgotPasswordPage from './Pages/ForgotPasswordPage'
+import ResetPasswordPage from './Pages/ResetPasswordPage'
+import CartPage from './Pages/CartPage'
+import ShippingPage from './Pages/ShippingPage'
+import SubmitOrderPage from './Pages/SubmitOrderPage'
+import PaymentPage from './Pages/PaymentPage'
+import OrderConfirmationPage from './Pages/OrderConfirmationPage'
+import SearchPage from './Pages/SearchPage'
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useContext } from 'react'
-import { Store } from './store.jsx'
+import { Store } from './store'
 import { addToCartHandler } from './utils.js'
 import axios from 'axios'
 
@@ -73,7 +73,7 @@ function App() {
             </Routes>
           </Container>
         </main>
-        {/* <Footer/> */}
+        <Footer/>
       </div>
      </DragDropContext>
     </BrowserRouter>
