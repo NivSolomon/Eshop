@@ -16,6 +16,8 @@ import CartPage from './Pages/CartPage.jsx'
 import ShippingPage from './Pages/ShippingPage.jsx'
 import SubmitOrderPage from './Pages/SubmitOrderPage.jsx'
 import PaymentPage from './Pages/PaymentPage.jsx'
+import OrderConfirmationPage from './Pages/OrderConfirmationPage.jsx'
+import SearchPage from './Pages/SearchPage.jsx'
 
 
 function App() {
@@ -36,9 +38,11 @@ function App() {
               <Route path = "/shipping" element = {<ShippingPage/>}></Route>
               <Route path = "/payment" element = {<PaymentPage/>}></Route>
               <Route path = "/placeorder" element = {<SubmitOrderPage/>}></Route>
+              <Route path = "/search" element = {<SearchPage/>}></Route>
               <Route path = "/forgot-password" element = {<ForgotPasswordPage/>}></Route>
               <Route path = "/password-reset/:id/:token" element = {<ResetPasswordPage/>}></Route>
               <Route path = "/product/:token" element = {<Description/>}></Route>
+              <Route path = "/orders/:id" element = {<OrderConfirmationPage/>}></Route>
             </Routes>
           </Container>
         </main>

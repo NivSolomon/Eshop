@@ -27,7 +27,7 @@ const ShippingPage = () => {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
     ctxDispatch({type: SAVE_SHIPPING_ADDRESS, payload: data});
-    navigate("/placeorder");
+    navigate("/payment");
   };
 
 

@@ -3,9 +3,9 @@ import MessageBox from "./MessageBox"
 
 const OrderSummary = ({cart, status, isDelivered}) => {
 
-  return (
-    <>
-    <Card className="mb-3">
+    return (
+        <>
+            <Card className="mb-3">
                 <Card.Header>
                     <Card.Title>
                         Shipping Address
@@ -25,13 +25,32 @@ const OrderSummary = ({cart, status, isDelivered}) => {
                         {cart.shippingAddress.country}
                     </Card.Text>
                     {status === "submitOrder" ?
-                    <Link to={`/shipping`}>Edit</Link> :
-                    isDelivered ? 
-                    <MessageBox variant='danger'>Not sent</MessageBox> :
-                    <MessageBox variant='success'>Sent</MessageBox>
-                    } 
+                        <Link to={`/shipping`}>Edit</Link> :
+                        isDelivered ?
+                            <MessageBox variant="success">Sent</MessageBox> :
+                            <MessageBox variant="danger">Not Sent</MessageBox>
+                    }
                 </Card.Body>
-                </Card>
+            </Card>
+            <Card className="mb-3">
+                <Card.Header>
+                    <Card.Title>
+                        Payment Method
+                    </Card.Title>
+                </Card.Header>
+                <Card.Body>
+                    <Card.Text>
+                        <strong>Method:</strong>
+                        {cart.paymentMethod}
+                    </Card.Text>
+                    {status === "submitOrder" ?
+                        <Link to="/payment">Edit</Link> :
+                        status === "details-unpaid" ?
+                            <MessageBox variant="danger">Not Paid</MessageBox> :
+                            <MessageBox variant="success">Paid</MessageBox>
+                    }
+                </Card.Body>
+            </Card>
             <Card className="mb-3">
                 <Card.Header>
                     <Card.Title>Items</Card.Title>
@@ -60,8 +79,8 @@ const OrderSummary = ({cart, status, isDelivered}) => {
                     {status === "submitOrder" && <Link to={`/cart`}>Edit</Link>}
                 </Card.Body>
             </Card>
-    </>
-  )
+        </>
+    )
 }
 
 OrderSummary.propTypes = {cart: PropTypes.object, status: PropTypes.string}
