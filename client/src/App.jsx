@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 //import Title from './Components/Shared/Title.jsx'
 import Container from 'react-bootstrap/Container'
 import {HomePage} from './Pages/HomePage'
-import Footer from './Components/Shared/Footer'
+// import Footer from './Components/Shared/Footer'
 import Header from './Components/Shared/Header'
 import SignIn from './Pages/SignIn'
 import {ToastContainer} from 'react-toastify';
@@ -73,7 +73,7 @@ function App() {
             </Routes>
           </Container>
         </main>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
      </DragDropContext>
     </BrowserRouter>
