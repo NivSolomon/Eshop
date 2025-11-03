@@ -35,7 +35,7 @@ const Search = () => {
   const price = searchParams.get("price") || "all";
   const rating = searchParams.get("rating") || "all";
   const order = searchParams.get("order") || "newest";
-  const page = searchParams.get("page") || 1; //feels smelly...
+  const page = searchParams.get("page") || 1; 
 
   const [{ loading, error, products, pages, countProducts }, dispatch] =
     useReducer(searchPageReducer, { loading: true, error: "" });
